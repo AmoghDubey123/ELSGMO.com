@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Table with Add/Edit/Delete Buttons</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px;
+      }
+      th {
+        background-color: #4CAF50;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .add-button, .edit-button, .delete-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      .add-button:hover, .edit-button:hover, .delete-button:hover {
+        background-color: #3e8e41;
+      }
+      .add-button {
+        float: right;
+      }
+      .edit-button {
+        background-color: #008CBA;
+      }
+      .delete-button {
+        background-color: #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><center>PPO DASH BOARD/ELECTIRC LOCO SHED</center></h2>
+    <h2>MAJOR INSPECTION</h2>
+    <table id="myTable">
+      <tr>
+        <th>SL no.</th>
+        <th>Loco no.</th>
+        <th>Shed IN date</th>
+        <th>Shed OUT date</th>
+        <th>Home shed</th>
+        <th>Work particular</th>
+        <th>FIT date</th>
+        <th>FIT time</th>
+        <th>BL date</th>
+        <th>BL time</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>31001</td>
+        <td>01/04/2023</td>
+        <td>02/04/2023</td>
+        <td>GMo</td>
+        <td>This is description</td>
+        <td>03/04/2023</td>
+        <td>10:00 AM</td>
+        <td>04/04/2023</td>
+        <td>11:00 AM</td>
+        <td>
+          <button class="edit-button" onclick="editRow(this)">Edit</button>
+          <button class="delete-button" onclick="deleteRow(this)">Delete</button>
+        </td>
+      </tr>
+    </table>
+    <button class="add-button" onclick="addRow()">Add New Registration</button>
+    <script>
+    function addRow() {
+    var table = document.getElementById("myTable");
+    var row = table.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
+    var cell8 = row.insertCell(7);
+    var cell9 = row.insertCell(8);
+    var cell10 = row.insertCell(9);
+    var cell11 = row.insertCell(10);
+    cell1.innerHTML = "";
+    cell2.innerHTML = "";
+    cell3.innerHTML = "";
+    cell4.innerHTML = "";
+    cell5.innerHTML = "";
+    cell6.innerHTML = "";
+    cell7.innerHTML = "";
+    cell8.innerHTML = "";
+    cell9.innerHTML = "";
+    cell10.innerHTML = "";
+    cell11.innerHTML = '<button class="edit-button" onclick="editRow(this)">Edit</button> <button class="delete-button" onclick="deleteRow(this)">Delete</button>';
+    }function editRow(button) {
+    var row = button.parentNode.parentNode;
+    var cells = row.getElementsByTagName("td");
+    for (var i = 0; i < cells.length - 1; i++) {
+      var input = document.createElement("input");
+      input.type = "text";
+      input.value = cells[i].innerHTML;
+      cells[i].innerHTML = "";
+      cells[i].appendChild(input);
+    }
+    button.innerHTML = "Save";
+    button.className = "add-button";
+    button.onclick = function() { saveRow(this) };
+  }
+
+  function saveRow(button) {
+    var row = button.parentNode.parentNode;
+    var cells = row.getElementsByTagName("td");
+    for (var i = 0; i < cells.length - 1; i++) {
+      var input = cells[i].getElementsByTagName("input")[0];
+      cells[i].innerHTML = input.value;
+    }
+    button.innerHTML = "Edit";
+    button.className = "edit-button";
+    button.onclick = function() { editRow(this) };
+  }
+
+  function deleteRow(button) {
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+  }
+</script>
+
